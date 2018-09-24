@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Валерий Архипов](https://up.htmlacademy.ru/nodejs/2/user/583335).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Сальников](https://htmlacademy.ru/profile/id24537).
 
 ---
 
