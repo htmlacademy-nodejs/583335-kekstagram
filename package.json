@@ -1,0 +1,24 @@
+{
+  "name": "583335-kekstagram-1",
+  "version": "0.0.1",
+  "description": "* Студент: [Валерий Архипов](https://up.htmlacademy.ru/nodejs/2/user/583335). * Наставник: [Евгений Сальников](https://htmlacademy.ru/profile/id24537).",
+  "main": "index.js",
+  "scripts": {
+    "test:lint": "eslint .",
+    "test": "npm run test:lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vvarh/583335-kekstagram-1.git"
+  },
+  "author": "Arkhipov Valerii",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vvarh/583335-kekstagram-1/issues"
+  },
+  "homepage": "https://github.com/vvarh/583335-kekstagram-1#readme",
+  "devDependencies": {
+    "eslint": "5.6.1",
+    "eslint-config-htmlacademy": "0.5.2"
+  }
+}
