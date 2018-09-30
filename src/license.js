@@ -6,6 +6,6 @@ module.exports = {
   name: `license`,
   description: `Shows license`,
   execute() {
-    console.log(`License: ${packageLicenseInfo}`);
+    console.log(`License: ${packageLicenseInfo.rainbow}`);
   }
 };
