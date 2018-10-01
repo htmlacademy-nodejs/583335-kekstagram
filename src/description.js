@@ -6,6 +6,6 @@ module.exports = {
   name: `description`,
   description: `Shows description`,
   execute() {
-    console.log(`Description: ${packageDescriptionInfo}`);
+    console.log(`Description: ${packageDescriptionInfo.random}`);
   }
 };
