@@ -7,7 +7,7 @@ const MAX_NUMBER_SCALE = 100;
 const MAX_NUMBER_LIKES = 100;
 const MAX_STRING_LENGTH = 140;
 const MAX_NUMBER_HASHTAGS = 5;
-const SEVEN_DAY_TO_SEC = 1000 * 60 * 60 * 24 * 7; // 604800 мсек = 7 дней
+const SEVEN_DAY_TO_MSEC = 1000 * 60 * 60 * 24 * 7; // 604800 мсек = 7 дней
 
 const EFFECTS = [`none`, `chrome`, `sepia`, `marvin`, `phobos`, `heat`];
 const STR = `массив строк не более 5 элементов каждая строка начинается с символа должно содержать одно слово без пробелов слова должны повт`;
@@ -25,19 +25,23 @@ const getString = () => {
 
 const getHashtags = () => {
   let arr = [];
-  const j = getRandomInteger(MAX_NUMBER_HASHTAGS);
+  const maxNumberTag = getRandomInteger(MAX_NUMBER_HASHTAGS);
 
   // создание массива хештегов
-  for (let i = 0; i <= j; i++) {
+  for (let i = 0; i < maxNumberTag; i++) {
     arr[i] = `#${WORDS[getRandomInteger(WORDS.length - 1)]}`;
   }
 
   // делаем проверку и возвращаем массив
-  return arr.map((it, i, arrParam) => {
-    it = arrParam.indexOf(it, i + 1) > -1 ? `` : it; // проверка на совпадения
-    it = it.length <= 20 ? it : ``; // проверка на длину
-    return it;
-  });
+  return arr
+    .map((it, i, arrParam) => {
+      it = arrParam.indexOf(it, i + 1) > -1 ? `` : it; // проверка на совпадения
+      it = it.length <= 20 ? it : ``; // проверка на длину
+      return it;
+    })
+    .filter((tag) => { // удаляем пустые хештеги
+      return tag !== ``;
+    });
 };
 
 const getComments = () => {
@@ -53,7 +57,7 @@ const getComments = () => {
 
 const getDate = () => { // дата = случайное число в интервале от сейчас минус 7 дней
   // слайчной время в течении 7 дней
-  const randomTime = getRandomInteger(SEVEN_DAY_TO_SEC);
+  const randomTime = getRandomInteger(SEVEN_DAY_TO_MSEC);
   return Date.now() - randomTime;
 };
 
