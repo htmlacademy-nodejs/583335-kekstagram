@@ -4,6 +4,7 @@ const MAX_NUMBER_SCALE = 100; // макс число уровня эффекта
 const MAX_NUMBER_LIKES = 1000; // макс число лайков
 const MAX_NUMBER_HASHTAGS = 5; // макс число #
 const MAX_LENGTH_DESCRIPTION = 140; // макс число #
+const SEVEN_DAY_TO_MSEC = 1000 * 60 * 60 * 24 * 7; // 604800 мсек = 7 дней
 
 const assert = require(`assert`); // core module
 const genE = require(`../src/generateEntity.js`).execute(); // module func
@@ -59,8 +60,11 @@ describe(`generateEntity`, () => {
       E.comments.forEach((it) => validateLengthItem(it));
     });
 
-    it(`date`, () => {
+    it(`date: from (now - 7) to now`, () => {
+      const t2 = Date.now(); // сейчас
+      const t1 = t2 - SEVEN_DAY_TO_MSEC; // сейчас минус 7 дней
 
+      assert(E.date >= t1 && E.date <= t2);
     });
 
   });
