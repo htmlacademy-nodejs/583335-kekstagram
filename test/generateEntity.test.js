@@ -1,4 +1,5 @@
 'use strict';
+
 const NUMBER_TEST = 10; // кол-во тестов
 const MIN_NUMBER = 0; // мин число
 const MAX_NUMBER_SCALE = 100; // макс число уровня эффекта
@@ -8,7 +9,7 @@ const MAX_LENGTH_DESCRIPTION = 140; // макс число #
 const SEVEN_DAY_TO_MSEC = 1000 * 60 * 60 * 24 * 7; // 604800 мсек = 7 дней
 
 const assert = require(`assert`); // core module
-const genE = require(`../src/generateEntity.js`).execute(); // module func
+const genE = require(`../src/generator/generateEntity.js`).execute(); // module func
 
 let E; // obj Entity
 
