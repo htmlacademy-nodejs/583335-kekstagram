@@ -6,6 +6,7 @@ const description = require(`./description.js`);
 const help = require(`./help.js`);
 const license = require(`./license.js`);
 const version = require(`./version.js`);
+const createFileEntity = require(`./createFileEntity.js`);
 
 const colors = require(`colors`);
 
@@ -23,7 +24,8 @@ const allCommands = {
   description,
   help,
   license,
-  version
+  version,
+  createFileEntity
 };
 
 module.exports = {
@@ -34,7 +36,7 @@ module.exports = {
     if (allCommands[commandParam]) {
       // команда найдена
       try {
-        allCommands[commandParam].execute()
+        allCommands[commandParam].execute();
       } catch (err) {
         onError(err);
       }
