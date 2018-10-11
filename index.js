@@ -1,6 +1,7 @@
 'use strict';
 
 const command = require(`./src/command.js`);
+const createFileEntity = require(`./src/createFileEntity.js`);
 const readline = require(`readline`);
 const fs = require(`fs`);
 
@@ -25,36 +26,37 @@ const askQuantity = () => new Promise((resolve) => {
       (answer) => !isNaN(answer) ? resolve(answer) : askQuantity());
 });
 
-const askFilePath = (quantity) => new Promise((resolve, reject) => {
+const askFilePath = (quantity) => new Promise((resolve) => {
   rl.question(`Укажите путь до файла> `,
       (answer) => resolve([quantity, answer]));
 });
 
-const askFileName = ([quantity, filePath]) => new Promise((resolve, reject) => {
-  // проверить есть ли такой файл, если есть спросить нужно переписать или нет
+const askFileName = ([quantity, filePath]) => new Promise((resolve) => {
   rl.question(`укажите название файла> `,
       (answer) => resolve([quantity, filePath, answer]));
 });
 
 const askRewrite = ([quantity, filePath, fileName]) => new Promise((resolve, reject) => {
-  fs.readdir(filePath, (err, files) => {
-    if (err) {
-      reject(`Генерация данных отменена`);
-    }
+  if (filePath === ``) {
+    resolve([quantity, filePath, fileName]);
+  } else {
+    fs.readdir(filePath, (err, files) => {
+      if (err) {
+        reject(`Генерация данных отменена`);
+      }
 
-    if (files.indexOf(fileName) === -1) {
-      rl.question(`Файл уже существует, перезаписать? (y/n)> `,
-          (answer) => answer.toLowerCase() === `y` ? resolve([quantity, filePath, fileName, `rewrite`]) : reject(`Генерация данных отменена`));
-    } else {
-      console.log(`новый файл`);
-      resolve([quantity, filePath, fileName, `new`]);
-    }
-  });
+      if (files.indexOf(fileName) === -1) { // файл не найден
+        resolve([quantity, filePath, fileName]);
+      } else {
+        rl.question(`Файл уже существует, перезаписать? (y/n)> `,
+            (answer) => answer.toLowerCase() === `y` ? resolve([quantity, filePath, fileName]) : reject(`Генерация данных отменена`));
+      }
+    });
+  }
 });
 
-const createFile = ([quantity, filePath, answer]) => {
-  console.log([quantity, filePath, answer]);
-  // записать файл с набранными параметрами из userAnswer
+const createFile = ([quantity, filePath, fileName]) => {
+  createFileEntity.execute([quantity, filePath, fileName]);
 };
 
 
