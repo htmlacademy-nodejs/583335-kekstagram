@@ -6,36 +6,42 @@ const description = require(`./description.js`);
 const help = require(`./help.js`);
 const license = require(`./license.js`);
 const version = require(`./version.js`);
+const createFileEntity = require(`./createFileEntity.js`);
 
 const colors = require(`colors`);
+
+const onError = (err) => {
+  console.error(err);
+  process.exit(1);
+};
 
 colors.setTheme({
   custom: `magenta`,
 });
 
-const allCommands = [
+const allCommands = {
   author,
   description,
   help,
   license,
-  version
-];
+  version,
+  createFileEntity
+};
 
 module.exports = {
   name: `command`,
   description: `run command`,
   execute(commandParam) {
-    let trueCommand = false;
-    for (let i = 0; i < allCommands.length; i++) {
-      if (commandParam === allCommands[i].name) {
-        trueCommand = true;
-        allCommands[i].execute();
-        break;
-      }
-    }
 
-    // ввод неизвестной команды
-    if (!trueCommand) {
+    if (allCommands[commandParam]) {
+      // команда найдена
+      try {
+        allCommands[commandParam].execute();
+      } catch (err) {
+        onError(err);
+      }
+    } else {
+      // ввод неизвестной команды
       console.error(`
       Неизвестная команда ${commandParam.custom}
       `);

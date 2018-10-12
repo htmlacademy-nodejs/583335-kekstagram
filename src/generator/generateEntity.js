@@ -1,6 +1,6 @@
 'use strict';
 
-const getRandomInteger = require(`./util/func.js`).getRandomInteger;
+const getRandomInteger = require(`../util/func.js`).getRandomInteger;
 
 const MAX_NUMBER_PHOTOS = 100;
 const MAX_NUMBER_SCALE = 100;
