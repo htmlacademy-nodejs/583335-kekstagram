@@ -5,12 +5,14 @@ const author = require(`./author.js`);
 const description = require(`./description.js`);
 const license = require(`./license.js`);
 const version = require(`./version.js`);
+const server = require(`./server.js`);
 
 const allCommands = [
   author,
   description,
   license,
-  version
+  version,
+  server
 ];
 
 module.exports = {
@@ -39,5 +41,6 @@ module.exports = {
     const nameColor = `help`.grey;
     const descriptionColor = `Shows help`.green;
     console.log(`--${nameColor}        — ${descriptionColor}`);
+    process.exit(0);
   }
 };
