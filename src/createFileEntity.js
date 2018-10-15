@@ -11,7 +11,10 @@ const fileWriteOptions = {encoding: `utf-8`, mode: 0o644};
 module.exports = {
   name: `createFileEntity`,
   description: `createFileEntity`,
-  execute([quantity = 1, filePath = DEFAULT_PATH, fileName = DEFAULT_FILE_NAME]) {
+  execute([quantity = 1, filePath, fileName]) {
+
+    filePath = filePath === `` ? DEFAULT_PATH : filePath;
+    fileName = fileName === `` ? DEFAULT_FILE_NAME : fileName;
 
     const data = [];
 
@@ -19,7 +22,6 @@ module.exports = {
       data.push(generateEntity(quantity));
     }
 
-    console.log([quantity, filePath, fileName]);
     const path = `${filePath}/${fileName}`;
     return new Promise((success, fail) => {
       fs.writeFile(path, JSON.stringify(data), fileWriteOptions, (err) => {
