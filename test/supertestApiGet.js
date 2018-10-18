@@ -20,7 +20,6 @@ describe(`GET /api/posts`, () => {
       .expect(`Content-Type`, /json/);
 
     const posts = response.body;
-    console.log(`posts.data.length ${posts.data.length}`);
     assert.equal(posts.data.length, LENGTH_POSTS);
   });
 
@@ -32,8 +31,6 @@ describe(`GET /api/posts`, () => {
       expect(`Content-Type`, /json/);
 
     const posts = response.body;
-    console.log(`posts.data.length ${posts.data.length}`);
-    console.log(`posts.total ${posts.total}`);
     assert.equal(posts.data.length, LENGTH_POSTS);
   });
 
