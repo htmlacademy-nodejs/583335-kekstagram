@@ -6,14 +6,17 @@ const postsRouter = express.Router();
 const generateData = require(`../../generator/generateEntity.js`).execute();
 const IllegalArgumentError = require(`../error/illegal-argument-error`);
 const NotFoundError = require(`../error/not-found-error`);
+const multer = require(`multer`);
 const {TEST_DATE} = require(`../../util/const.js`);
 
-const posts = [];
+const upload = multer({storage: multer.memoryStorage()});
 
 const NUMBER_POST = 17;
-
 const SKIP_DEFAULT = 0;
 const LIMIT_DEFAULT = 50;
+
+const jsonParser = express.json();
+const posts = [];
 
 postsRouter.get(`/`, (req, res) => {
   const skip = parseInt(req.query.skip, 10) || SKIP_DEFAULT;
@@ -50,6 +53,17 @@ postsRouter.get(`/:date`, (req, res) => {
 
   res.send(post);
 });
+
+postsRouter.post(``, jsonParser, upload.single(`url`), (req, res) => {
+  const {body, file} = req;
+
+  if (file) {
+    body.url = file.originalname;
+  }
+
+  res.send(body);
+});
+
 
 for (let i = 0; i < NUMBER_POST; i++) {
   posts[i] = generateData();
