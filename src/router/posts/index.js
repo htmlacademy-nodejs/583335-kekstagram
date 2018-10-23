@@ -8,6 +8,7 @@ const IllegalArgumentError = require(`../error/illegal-argument-error`);
 const NotFoundError = require(`../error/not-found-error`);
 const multer = require(`multer`);
 const {TEST_DATE} = require(`../../util/const.js`);
+const validate = require(`./validate`);
 
 const upload = multer({storage: multer.memoryStorage()});
 
@@ -54,14 +55,16 @@ postsRouter.get(`/:date`, (req, res) => {
   res.send(post);
 });
 
-postsRouter.post(``, jsonParser, upload.single(`url`), (req, res) => {
-  const {body, file} = req;
+postsRouter.post(``, jsonParser, upload.single(`image`), (req, res) => {
 
-  if (file) {
-    body.url = file.originalname;
+  const image = req.file;
+  const body = req.body;
+
+  if (image) {
+    body.image = {title: image.originalname};
   }
 
-  res.send(body);
+  res.send(validate(body));
 });
 
 

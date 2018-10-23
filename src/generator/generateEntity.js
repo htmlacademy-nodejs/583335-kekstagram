@@ -2,18 +2,19 @@
 
 const getRandomInteger = require(`../util/func.js`).getRandomInteger;
 
-const MAX_NUMBER_PHOTOS = 100;
-const MAX_NUMBER_SCALE = 100;
-const MAX_NUMBER_LIKES = 100;
-const MAX_STRING_LENGTH = 140;
-const MAX_NUMBER_HASHTAGS = 5;
-const SEVEN_DAY_TO_MSEC = 1000 * 60 * 60 * 24 * 7; // 604800 мсек = 7 дней
+const {
+  MAX_NUMBER_PHOTOS,
+  MAX_NUMBER_SCALE,
+  EFFECTS,
+  MAX_NUMBER_LIKES,
+  MAX_STRING_LENGTH,
+  MAX_NUMBER_HASHTAGS,
+  SEVEN_DAY_TO_MSEC,
+} = require(`../util/const.js`);
 
-const EFFECTS = [`none`, `chrome`, `sepia`, `marvin`, `phobos`, `heat`];
 const STR = `массив строк не более 5 элементов каждая строка начинается с символа должно содержать одно слово без пробелов слова должны повт`;
 
 const WORDS = STR.split(/[\s]+/);
-
 
 const getEffect = () => {
   return EFFECTS[getRandomInteger(EFFECTS.length - 1)];
@@ -56,7 +57,7 @@ const getComments = () => {
 };
 
 const getDate = () => { // дата = случайное число в интервале от сейчас минус 7 дней
-  // слайчной время в течении 7 дней
+  // случайное время в течении 7 дней
   const randomTime = getRandomInteger(SEVEN_DAY_TO_MSEC);
   return Date.now() - randomTime;
 };

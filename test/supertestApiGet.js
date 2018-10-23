@@ -24,22 +24,22 @@ describe(`GET /api/posts`, () => {
   });
 
   it(`get all posts with / at the end`, async () => {
-    const response = await supertest(app).
-      get(`/api/posts/`).
-      set(`Accept`, `application/json`).
-      expect(200).
-      expect(`Content-Type`, /json/);
+    const response = await supertest(app)
+      .get(`/api/posts/`)
+      .set(`Accept`, `application/json`)
+      .expect(200)
+      .expect(`Content-Type`, /json/);
 
     const posts = response.body;
     assert.equal(posts.data.length, LENGTH_POSTS);
   });
 
   it(`get all posts?skip=${SKIP_POST}&limit=20`, async () => {
-    const response = await supertest(app).
-      get(`/api/posts?skip=2&limit=20`).
-      set(`Accept`, `application/json`).
-      expect(200).
-      expect(`Content-Type`, /json/);
+    const response = await supertest(app)
+      .get(`/api/posts?skip=2&limit=20`)
+      .set(`Accept`, `application/json`)
+      .expect(200)
+      .expect(`Content-Type`, /json/);
 
     const posts = response.body;
     assert.equal(posts.total, LENGTH_POSTS_WITH_SKIP);
@@ -58,22 +58,22 @@ describe(`GET /api/posts`, () => {
 
 describe(`GET /api/posts/:date`, () => {
   it(`get post with date ${TEST_DATE}`, async () => {
-    const response = await supertest(app).
-      get(`/api/posts/${TEST_DATE}`).
-      set(`Accept`, `application/json`).
-      expect(200).
-      expect(`Content-Type`, /json/);
+    const response = await supertest(app)
+      .get(`/api/posts/${TEST_DATE}`)
+      .set(`Accept`, `application/json`)
+      .expect(200)
+      .expect(`Content-Type`, /json/);
 
     const post = response.body;
     assert.strictEqual(post.date, TEST_DATE);
   });
 
   it(`get unknown post with date ${BAD_TEST_DATE}`, async () => {
-    return supertest(app).
-      get(`/api/posts/${BAD_TEST_DATE}`).
-      set(`Accept`, `application/json`).
-      expect(404).
-      expect(`не найден пост с датой ${BAD_TEST_DATE}`).
-      expect(`Content-Type`, /html/);
+    return supertest(app)
+      .get(`/api/posts/${BAD_TEST_DATE}`)
+      .set(`Accept`, `application/json`)
+      .expect(404)
+      .expect(`не найден пост с датой ${BAD_TEST_DATE}`)
+      .expect(`Content-Type`, /html/);
   });
 });
