@@ -2,13 +2,22 @@
 
 const supertest = require(`supertest`);
 const assert = require(`assert`);
-const {app} = require(`../src/server`);
+const express = require(`express`);
+// const {app} = require(`../src/server`);
+
+const postsStoreMock = require(`./mock/posts-store-mock`);
+const imageStoreMock = require(`./mock/image-store-mock`);
+const postsRouter = require(`../src/router/posts/router`)(postsStoreMock, imageStoreMock);
 
 const {TEST_DATE} = require(`../src/util/const.js`);
+
 const BAD_TEST_DATE = 7776000; // 1 апреля 1970г
 const LENGTH_POSTS = 17;
 const SKIP_POST = 2;
 const LENGTH_POSTS_WITH_SKIP = LENGTH_POSTS - SKIP_POST;
+
+const app = express();
+app.use(`/api/posts`, postsRouter);
 
 describe(`GET /api/posts`, () => {
 
@@ -20,6 +29,10 @@ describe(`GET /api/posts`, () => {
       .expect(`Content-Type`, /json/);
 
     const posts = response.body;
+    console.log(`>>> posts`);
+    console.log(posts);
+    console.log(posts.data.length);
+    console.log(LENGTH_POSTS);
     assert.equal(posts.data.length, LENGTH_POSTS);
   });
 

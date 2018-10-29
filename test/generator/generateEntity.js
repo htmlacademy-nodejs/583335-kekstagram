@@ -1,6 +1,6 @@
 'use strict';
 
-const getRandomInteger = require(`../util/func.js`).getRandomInteger;
+const getRandomInteger = require(`../../src/util/func.js`).getRandomInteger;
 
 const {
   MAX_NUMBER_PHOTOS,
@@ -10,7 +10,7 @@ const {
   MAX_STRING_LENGTH,
   MAX_NUMBER_HASHTAGS,
   SEVEN_DAY_TO_MSEC,
-} = require(`../util/const.js`);
+} = require(`../../src/util/const.js`);
 
 const STR = `массив строк не более 5 элементов каждая строка начинается с символа должно содержать одно слово без пробелов слова должны повт`;
 
@@ -81,7 +81,5 @@ const generateEntity = () => {
 module.exports = {
   name: `generateEntity`,
   description: `generateEntity`,
-  execute() {
-    return generateEntity;
-  }
+  generateEntity
 };

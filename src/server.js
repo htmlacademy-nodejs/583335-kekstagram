@@ -1,7 +1,12 @@
 'use strict';
 
 const express = require(`express`);
-const postRouter = require(`./router/posts/index.js`);
+
+const postsStore = require(`./router/posts/store`);
+const imageStore = require(`./image/store`);
+const postRouter = require(`./router/posts/router.js`)(postsStore, imageStore);
+
+
 const app = express();
 
 const DEFAULT_PORT = 3000;
