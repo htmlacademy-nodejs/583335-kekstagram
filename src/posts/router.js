@@ -12,14 +12,9 @@ const {Duplex} = require(`stream`);
 
 const ValidationError = require(`../error/validation-error`);
 const validate = require(`./validate`);
-// const toStream = require(`buffer-to-stream`);
 
 const upload = multer({storage: multer.memoryStorage()});
 const jsonParser = express.json();
-
-// const generateData = require(`../../generator/generateEntity.js`).execute();
-// const {TEST_DATE} = require(`../../util/const.js`);
-// const NUMBER_POST = 17;
 
 const SKIP_DEFAULT = 0;
 const LIMIT_DEFAULT = 50;
@@ -138,6 +133,10 @@ postsRouter.use(ERROR_HANDLER);
 postsRouter.use(NOT_FOUND_HANDLER);
 
 module.exports = (postsStore, imageStore) => {
+  console.log(`>>> router `);
+  console.log(postsStore);
+  console.log(imageStore);
+
   postsRouter.postsStore = postsStore;
   postsRouter.imageStore = imageStore;
   return postsRouter;

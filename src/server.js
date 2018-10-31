@@ -2,9 +2,9 @@
 
 const express = require(`express`);
 
-const postsStore = require(`./router/posts/store`);
+const postsStore = require(`./posts/store`);
 const imageStore = require(`./image/store`);
-const postRouter = require(`./router/posts/router.js`)(postsStore, imageStore);
+const postRouter = require(`./posts/router.js`)(postsStore, imageStore);
 
 
 const app = express();
