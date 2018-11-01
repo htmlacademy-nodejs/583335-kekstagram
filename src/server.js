@@ -12,7 +12,6 @@ const app = express();
 const DEFAULT_PORT = 3000;
 
 const NOT_FOUND_HANDLER = (req, res) => {
-
   res.status(404).send(`Page was not found`);
 };
 
@@ -24,7 +23,6 @@ const ERROR_HANDLER = (err, req, res, _next) => {
 
 app.use(express.static(`static`));
 app.use(`/api/posts`, postRouter);
-
 app.use(NOT_FOUND_HANDLER);
 app.use(ERROR_HANDLER);
 
@@ -38,7 +36,7 @@ module.exports = {
   execute(port = DEFAULT_PORT) {
     runServer(port);
   },
-  app
+  app: runServer,
 };
 
 

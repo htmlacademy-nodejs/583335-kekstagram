@@ -71,7 +71,7 @@ const validate = (data) => {
   }
 
   if (data.hashtags) {
-    const list = data.hashtags.trim().split(/[\s]+/);
+    const list = data.hashtags;
 
     if (validationHashTag.checkLength(list)) {
       setError(`hashtags`, `Field 'hashtags' must be less then ${MAX_NUMBER_HASHTAGS} hashtags!`);

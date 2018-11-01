@@ -20,8 +20,8 @@ module.exports = {
     url: `https://picsum.photos/600/505.png`,
     description: `description`,
     effect: `none`,
-    hashtags: `#hashtags`,
-    comments: `comments`,
+    hashtags: [`#hashtags1`, `#hashtags2`],
+    comments: [`comments1`, `comments2`],
     likes: 500,
     scale: 50,
     date: 1541018000000

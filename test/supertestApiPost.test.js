@@ -13,7 +13,7 @@ const app = express();
 const IMG_URL = `test/img/26.jpg`;
 const POST_DESCRIPTION = `Самая красивая тачка на этой планете`;
 const POST_EFFECT = `chrome`;
-const POST_HASHTAGS = `#тачка #огонь #car #bmwX5`;
+const POST_HASHTAGS = [`#тачка`, `#огонь`, `#car`, `#bmwX5`];
 const POST_SCALE = `100`;
 
 app.use(`/api/posts`, postsRouter);
@@ -39,7 +39,7 @@ describe(`POST /api/posts`, () => {
     const post = response.body;
     assert.strictEqual(post.description, SENT.description);
     assert.strictEqual(post.effect, SENT.effect);
-    assert.strictEqual(post.hashtags, SENT.hashtags);
+    assert.deepStrictEqual(post.hashtags, SENT.hashtags);
   });
 
   it(`send post as json with no url and get error`, async () => {
@@ -78,7 +78,7 @@ describe(`POST /api/posts`, () => {
     assert.strictEqual(newPost.filename, IMG_URL);
     assert.strictEqual(newPost.description, POST_DESCRIPTION);
     assert.strictEqual(newPost.effect, POST_EFFECT);
-    assert.strictEqual(newPost.hashtags, POST_HASHTAGS);
+    assert.deepStrictEqual(newPost.hashtags, POST_HASHTAGS);
     assert.strictEqual(newPost.scale, POST_SCALE);
   });
 

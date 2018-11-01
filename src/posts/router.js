@@ -133,10 +133,6 @@ postsRouter.use(ERROR_HANDLER);
 postsRouter.use(NOT_FOUND_HANDLER);
 
 module.exports = (postsStore, imageStore) => {
-  console.log(`>>> router `);
-  console.log(postsStore);
-  console.log(imageStore);
-
   postsRouter.postsStore = postsStore;
   postsRouter.imageStore = imageStore;
   return postsRouter;

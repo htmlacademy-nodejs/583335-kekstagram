@@ -4,6 +4,7 @@
   "description": "* Студент: [Валерий Архипов](https://up.htmlacademy.ru/nodejs/2/user/583335). * Наставник: [Евгений Сальников](https://htmlacademy.ru/profile/id24537).",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "test:lint": "eslint .",
     "test:mocha": "mocha",
     "test": "npm run test:lint && npm run test:mocha"

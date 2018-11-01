@@ -28,8 +28,6 @@ class PostsStoreMock {
   }
 }
 
-// module.exports = new PostsStoreMock(generateData.execute([NUMBER_ENTITY_IN_STORE]));
-
 module.exports = new PostsStoreMock(
     (() => {
       const posts = [];
@@ -38,9 +36,6 @@ module.exports = new PostsStoreMock(
         posts.push(generateEntity());
       }
       posts.push(POST_IN_STORE);
-
-      console.log(`posts`);
-      console.log(posts);
 
       return posts;
     })()
