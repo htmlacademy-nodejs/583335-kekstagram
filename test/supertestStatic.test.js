@@ -42,7 +42,7 @@ describe(`static`, () => {
   });
 
   it(`get data from unknown resource`, async () => {
-    const a = await supertest(app)
+    return await supertest(app)
       .get(`/badway`)
       .expect(404)
       .expect(`Page was not found`)
