@@ -72,7 +72,6 @@ describe(`POST /api/posts`, () => {
       .expect(200)
       .expect(`Content-Type`, /json/);
 
-
     const newPost = response.body;
 
     assert.strictEqual(newPost.filename, IMG_URL);
@@ -81,35 +80,6 @@ describe(`POST /api/posts`, () => {
     assert.deepStrictEqual(newPost.hashtags, POST_HASHTAGS);
     assert.strictEqual(newPost.scale, POST_SCALE);
   });
-
-  // it(`send post with image as multipart/form-data`, async () => {
-  //   const response = await supertest(app)
-  //     .post(`/api/posts`)
-  //     .field(`filename`, IMG_URL)
-  //     .field(`description`, POST_DESCRIPTION)
-  //     .field(`effect`, POST_EFFECT)
-  //     .field(`hashtags`, POST_HASHTAGS)
-  //     .field(`scale`, POST_SCALE)
-  //     .attach(`image`, IMG_URL)
-  //     .set(`Accept`, `application/json`)
-  //     .set(`Content-Type`, `multipart/form-data`)
-  //     .expect(200)
-  //     .expect(`Content-Type`, /json/);
-
-  //   const post = response.body;
-  //   assert.deepEqual(post,
-  //       {
-  //         filename: IMG_URL,
-  //         description: POST_DESCRIPTION,
-  //         effect: POST_EFFECT,
-  //         hashtags: POST_HASHTAGS,
-  //         scale: POST_SCALE,
-  //         image: {
-  //           title: IMG_NAME
-  //         }
-  //       }
-  //   );
-  // });
 
   it(`send post as multipart/form-data with no date and get error`, async () => {
     await supertest(app)

@@ -79,8 +79,8 @@ describe(`GET /api/posts`, () => {
       assert.strictEqual(post.url, POST_IN_STORE.url);
       assert.strictEqual(post.description, POST_IN_STORE.description);
       assert.strictEqual(post.effect, POST_IN_STORE.effect);
-      assert.strictEqual(post.hashtags, POST_IN_STORE.hashtags);
-      assert.strictEqual(post.comments, POST_IN_STORE.comments);
+      assert.deepStrictEqual(post.hashtags, POST_IN_STORE.hashtags);
+      assert.deepStrictEqual(post.comments, POST_IN_STORE.comments);
       assert.strictEqual(post.likes, POST_IN_STORE.likes);
       assert.strictEqual(post.date, POST_IN_STORE.date);
     });
@@ -95,5 +95,3 @@ describe(`GET /api/posts`, () => {
     });
   });
 });
-
-
