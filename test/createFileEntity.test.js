@@ -6,7 +6,7 @@ const MAX_NUMBER_ENTITY = 20;
 const assert = require(`assert`); // core module
 const fs = require(`fs`);
 const {promisify} = require(`util`);
-const createFileEntity = require(`../src/createFileEntity.js`);
+const createFileEntity = require(`./generator/createFileEntity.js`);
 const getRandomInteger = require(`../src/util/func.js`).getRandomInteger;
 
 const access = promisify(fs.access);

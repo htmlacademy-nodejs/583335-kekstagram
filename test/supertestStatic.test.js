@@ -1,11 +1,25 @@
 'use strict';
 
 const supertest = require(`supertest`);
-const {app} = require(`../src/server`);
+const express = require(`express`);
+const app = express();
+
+const NOT_FOUND_HANDLER = (req, res) => {
+  res.status(404).send(`Page was not found`);
+};
+
+const ERROR_HANDLER = (err, req, res, _next) => {
+  if (err) {
+    res.status(err.code || 500).send(err.message);
+  }
+};
+
+app.use(express.static(`static`));
+app.use(NOT_FOUND_HANDLER);
+app.use(ERROR_HANDLER);
 
 
 describe(`static`, () => {
-
   it(`checked index`, async () => {
     await supertest(app)
       .get(`/`)

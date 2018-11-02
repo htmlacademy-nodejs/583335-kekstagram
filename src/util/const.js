@@ -15,4 +15,15 @@ module.exports = {
   MIN_HASHTAG_LENGTH: 1,
   MAX_HASHTAG_LENGTH: 20,
   SEVEN_DAY_TO_MSEC: 1000 * 60 * 60 * 24 * 7, // 604800 мсек = 7 дней
+  NUMBER_ENTITY_IN_STORE: 5,
+  POST_IN_STORE: {
+    url: `https://picsum.photos/600/505.png`,
+    description: `description`,
+    effect: `none`,
+    hashtags: [`#hashtags1`, `#hashtags2`],
+    comments: [`comments1`, `comments2`],
+    likes: 500,
+    scale: 50,
+    date: 1541018000000
+  },
 };

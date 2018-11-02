@@ -11,7 +11,7 @@ const {
   MAX_NUMBER_HASHTAGS,
   MIN_HASHTAG_LENGTH,
   MAX_HASHTAG_LENGTH,
-} = require(`../../util/const.js`);
+} = require(`../util/const.js`);
 
 const validationHashTag = {
   checkLength(list) {
@@ -67,11 +67,11 @@ const validate = (data) => {
   }
 
   if (data.description && data.description > MAX_STRING_LENGTH) {
-    setError(`description`, `Field 'descriptoin' must be less then ${MAX_STRING_LENGTH} charsets!`);
+    setError(`description`, `Field 'description' must be less then ${MAX_STRING_LENGTH} charsets!`);
   }
 
   if (data.hashtags) {
-    const list = data.hashtags.trim().split(/[\s]+/);
+    const list = data.hashtags;
 
     if (validationHashTag.checkLength(list)) {
       setError(`hashtags`, `Field 'hashtags' must be less then ${MAX_NUMBER_HASHTAGS} hashtags!`);

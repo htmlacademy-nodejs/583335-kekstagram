@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require(`fs`);
-const generateEntity = require(`./generator/generateEntity.js`).execute();
+const {generateEntity} = require(`./generateEntity.js`);
 
 const DEFAULT_PATH = `${process.cwd()}`;
 const DEFAULT_FILE_NAME = `entity.json`;
@@ -12,6 +12,7 @@ module.exports = {
   name: `createFileEntity`,
   description: `createFileEntity`,
   execute([quantity = 1, filePath, fileName]) {
+    console.log(`> createFileEntity  quantity= ${quantity}`);
 
     filePath = filePath === `` ? DEFAULT_PATH : filePath;
     fileName = fileName === `` ? DEFAULT_FILE_NAME : fileName;

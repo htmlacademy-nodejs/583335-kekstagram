@@ -9,19 +9,19 @@ const MAX_LENGTH_DESCRIPTION = 140; // макс число #
 const SEVEN_DAY_TO_MSEC = 1000 * 60 * 60 * 24 * 7; // 604800 мсек = 7 дней
 
 const assert = require(`assert`); // core module
-const genE = require(`../src/generator/generateEntity.js`).execute(); // module func
+const {generateEntity} = require(`./generator/generateEntity.js`); // module func
 
 let E; // obj Entity
 
 describe(`generateEntity`, () => {
   beforeEach(() => {
-    E = genE();
+    E = generateEntity();
   });
 
   for (let i = 0; i < NUMBER_TEST; i++) {
     describe(`#generateEntity()`, () => {
       it(`Функция срабатывает без ошибок`, () => {
-        assert.doesNotThrow(genE, `missing foo`, `did not throw with expected message`);
+        assert.doesNotThrow(generateEntity, `missing foo`, `did not throw with expected message`);
       });
     });
 
