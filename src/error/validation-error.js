@@ -1,10 +1,12 @@
 'use strict';
 
+const logger = require(`../logger`);
+
 module.exports = class ValidateError extends Error {
-  constructor(errors) {
+  constructor(err) {
     super(`Data validation error`);
-    this.errors = errors;
+    this.errors = err;
     this.code = 400;
-    console.log(errors);
+    logger.error(`ValidateError: ${err}`, err);
   }
 };

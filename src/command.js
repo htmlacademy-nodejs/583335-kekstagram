@@ -9,9 +9,10 @@ const version = require(`./version.js`);
 const server = require(`./server.js`);
 
 const colors = require(`colors`);
+const logger = require(`./logger`);
 
 const onError = (err) => {
-  console.error(err);
+  logger.error(err);
   process.exit(1);
 };
 
@@ -42,9 +43,7 @@ module.exports = {
       }
     } else {
       // ввод неизвестной команды
-      console.error(`
-      Неизвестная команда ${commandParam.custom}
-      `);
+      logger.error(`Неизвестная команда ${commandParam.custom}`);
       help.execute();
       process.exit(1);
     }

@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require(`express`);
+const logger = require(`../logger`);
 
 // eslint-disable-next-line new-cap
 const postsRouter = express.Router();
@@ -77,10 +78,10 @@ postsRouter.get(`/:date/image`, asyncMiddleware(async (req, res) => {
     'Content-Length': info.length
   });
 
-  res.on(`error`, console.error);
+  res.on(`error`, (err) => logger.error(`Error with GET /:date/image response    ${err}`, err));
   res.on(`end`, res.end);
 
-  stream.on(`error`, console.error);
+  stream.on(`error`, (err) => logger.error(`Error with /:date/image stream    ${err}`, err));
   stream.on(`end`, res.end);
 
   stream.pipe(res);
@@ -118,7 +119,7 @@ const NOT_FOUND_HANDLER = (req, res) => {
 };
 
 const ERROR_HANDLER = (err, req, res, _next) => {
-  console.error(err);
+  logger.error(`ERROR_HANDLER ${err}`, err);
   if (err instanceof ValidationError) {
     res.status(err.code).json(err.errors);
     return;

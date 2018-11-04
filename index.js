@@ -1,10 +1,13 @@
 'use strict';
 
+require(`dotenv`).config();
+
 const command = require(`./src/command.js`);
 const server = require(`./src/server.js`);
+const logger = require(`./src/logger`);
 
 const onError = (err) => {
-  console.error(err);
+  logger.error(err);
   process.exit(1);
 };
 
@@ -28,6 +31,6 @@ const handleInitCommands = ([, , cmd]) => {
 };
 
 // обработать все неподписанные ошибки
-process.on(`uncaughtException`, (err) => console.log(`Caught exveption: ${err}\n`));
+process.on(`uncaughtException`, (err) => logger.error(`Caught exception: ${err}\n`));
 
 handleInitCommands(process.argv);
