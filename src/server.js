@@ -31,12 +31,12 @@ const CORS_HANDLER = (req, res, next) => {
   });
   next();
 };
+app.use(CORS_HANDLER);
 
 app.use(express.static(`static`));
 app.use(`/api/posts`, postRouter);
 app.use(NOT_FOUND_HANDLER);
 app.use(ERROR_HANDLER);
-app.use(CORS_HANDLER);
 
 const runServer = (port = SERVER_PORT) => {
   app.listen(port, SERVER_HOST, () => logger.info(`Сервер запущен: http://${SERVER_HOST}:${port}`));
