@@ -3,7 +3,7 @@
 const ValidateError = require(`../error/validation-error`);
 
 const {
-  FILE_TYPE,
+  FILE_TYPES,
   MIN_NUMBER_SCALE,
   MAX_NUMBER_SCALE,
   EFFECTS,
@@ -42,12 +42,14 @@ const validate = (data) => {
     errorMessage: message
   });
 
-  if (data.filename) {
-    if (!FILE_TYPE.test(data.filename)) {
-      setError(`file`, `Field 'filename' must be a image type!`);
+  if (!data.filename) {
+    errors.push(`Field "filename" is required!`);
+  }
+
+  if (data.filetype) {
+    if (FILE_TYPES.indexOf(data.filetype) === -1) {
+      errors.push(`Wrong type of file`);
     }
-  } else {
-    setError(`file`, `Field 'filename' is required!`);
   }
 
   if (data.scale !== undefined) {
@@ -71,7 +73,8 @@ const validate = (data) => {
   }
 
   if (data.hashtags) {
-    const list = data.hashtags;
+    // проверка что пришло или массив или строка   => на выходе массив
+    const list = (Array.isArray(data.hashtags)) ? data.hashtags : data.hashtags.split(/[\s]+/);
 
     if (validationHashTag.checkLength(list)) {
       setError(`hashtags`, `Field 'hashtags' must be less then ${MAX_NUMBER_HASHTAGS} hashtags!`);
@@ -91,6 +94,8 @@ const validate = (data) => {
   }
 
   if (errors.length) {
+    console.log(`>> validate errors`);
+    console.log(errors);
     throw new ValidateError(errors);
   }
 

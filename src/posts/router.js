@@ -99,9 +99,12 @@ postsRouter.post(``, jsonParser, upload.single(`filename`), asyncMiddleware(asyn
     };
   }
 
-  const validated = validate(body);
-  validated.date = Date.now();
-  const result = await postsRouter.postsStore.save(validated);
+  if (!body.date) {
+    body.date = Math.floor(Date.now());
+  }
+  body.url = `/api/posts/${parseInt(body.date, 10)}/image`;
+
+  const result = await postsRouter.postsStore.save(validate(body));
   const insertedId = result.insertedId;
 
   if (image) {
@@ -111,7 +114,7 @@ postsRouter.post(``, jsonParser, upload.single(`filename`), asyncMiddleware(asyn
     return;
   }
 
-  res.send(validated);
+  res.send(validate(body));
 }));
 
 const NOT_FOUND_HANDLER = (req, res) => {

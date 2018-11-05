@@ -5,6 +5,7 @@ module.exports = {
   description: `util const`,
   TEST_DATE: 1540026296000, // Sat, 20 Oct 2018 09:04:56 GMT
   FILE_TYPE: /jpg/,
+  FILE_TYPES: [`image/jpeg`, `image/png`],
   MAX_NUMBER_PHOTOS: 100,
   MIN_NUMBER_SCALE: 0,
   MAX_NUMBER_SCALE: 100,
