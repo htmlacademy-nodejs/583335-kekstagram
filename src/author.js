@@ -7,5 +7,6 @@ module.exports = {
   description: `Shows author`,
   execute() {
     console.log(`Author: ${packageAuthorInfo.bgBlue}`);
+    process.exit(0);
   }
 };

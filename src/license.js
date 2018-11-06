@@ -7,5 +7,6 @@ module.exports = {
   description: `Shows license`,
   execute() {
     console.log(`License: ${packageLicenseInfo.rainbow}`);
+    process.exit(0);
   }
 };
