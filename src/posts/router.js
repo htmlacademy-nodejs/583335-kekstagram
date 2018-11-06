@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require(`express`);
+const logger = require(`../logger`);
 
 // eslint-disable-next-line new-cap
 const postsRouter = express.Router();
@@ -77,10 +78,10 @@ postsRouter.get(`/:date/image`, asyncMiddleware(async (req, res) => {
     'Content-Length': info.length
   });
 
-  res.on(`error`, console.error);
+  res.on(`error`, (err) => logger.error(`Error with GET /:date/image response    ${err}`, err));
   res.on(`end`, res.end);
 
-  stream.on(`error`, console.error);
+  stream.on(`error`, (err) => logger.error(`Error with /:date/image stream    ${err}`, err));
   stream.on(`end`, res.end);
 
   stream.pipe(res);
@@ -98,9 +99,12 @@ postsRouter.post(``, jsonParser, upload.single(`filename`), asyncMiddleware(asyn
     };
   }
 
-  const validated = validate(body);
-  validated.date = Date.now();
-  const result = await postsRouter.postsStore.save(validated);
+  if (!body.date) {
+    body.date = Math.floor(Date.now());
+  }
+  body.url = `/api/posts/${parseInt(body.date, 10)}/image`;
+
+  const result = await postsRouter.postsStore.save(validate(body));
   const insertedId = result.insertedId;
 
   if (image) {
@@ -110,7 +114,7 @@ postsRouter.post(``, jsonParser, upload.single(`filename`), asyncMiddleware(asyn
     return;
   }
 
-  res.send(validated);
+  res.send(validate(body));
 }));
 
 const NOT_FOUND_HANDLER = (req, res) => {
@@ -118,7 +122,7 @@ const NOT_FOUND_HANDLER = (req, res) => {
 };
 
 const ERROR_HANDLER = (err, req, res, _next) => {
-  console.error(err);
+  logger.error(`ERROR_HANDLER ${err}`, err);
   if (err instanceof ValidationError) {
     res.status(err.code).json(err.errors);
     return;
