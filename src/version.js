@@ -8,5 +8,6 @@ module.exports = {
   execute() {
     const version = packageVersionInfo.split(`.`);
     console.log(`v${version[0].red}.${version[1].green}.${version[2].blue}`);
+    process.exit(0);
   }
 };

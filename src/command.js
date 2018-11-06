@@ -3,6 +3,7 @@
 // все модули подгружаются здесь
 const author = require(`./author.js`);
 const description = require(`./description.js`);
+const fill = require(`./fill.js`);
 const help = require(`./help.js`);
 const license = require(`./license.js`);
 const version = require(`./version.js`);
@@ -23,6 +24,7 @@ colors.setTheme({
 const allCommands = {
   author,
   description,
+  fill,
   help,
   license,
   version,
