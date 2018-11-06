@@ -7,7 +7,7 @@ const logger = require(`../logger`);
 const postsRouter = express.Router();
 const IllegalArgumentError = require(`../error/illegal-argument-error`);
 const NotFoundError = require(`../error/not-found-error`);
-const InvalidMethod = require(`../error/invalid-method`);
+const InvalidMethodError = require(`../error/invalid-method-error`);
 const multer = require(`multer`);
 const MongoError = require(`mongodb`).MongoError;
 const {Duplex} = require(`stream`);
@@ -138,7 +138,7 @@ const ERROR_HANDLER = (err, req, res, _next) => {
 const INVALID_METHODS = (req, res, next) => {
   if (!VALID_METHODS.includes(req.method)) {
     res.status(501);
-    throw new InvalidMethod(`${req.method}`);
+    throw new InvalidMethodError(`${req.method}`);
   } else {
     next();
   }
