@@ -2,7 +2,7 @@
 
 const logger = require(`../logger`);
 
-module.exports = class InvalidMethod extends Error {
+module.exports = class NotFoundMethodError extends Error {
   constructor(message) {
     super(message);
     this.code = 501;

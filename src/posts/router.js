@@ -5,13 +5,13 @@ const logger = require(`../logger`);
 
 // eslint-disable-next-line new-cap
 const postsRouter = express.Router();
-const IllegalArgumentError = require(`../error/illegal-argument-error`);
-const NotFoundError = require(`../error/not-found-error`);
-const InvalidMethodError = require(`../error/invalid-method-error`);
 const multer = require(`multer`);
 const MongoError = require(`mongodb`).MongoError;
 const {Duplex} = require(`stream`);
 
+const IllegalArgumentError = require(`../error/illegal-argument-error`);
+const NotFoundError = require(`../error/not-found-error`);
+const NotFoundMethodError = require(`../error/not-found-method-error.js`);
 const ValidationError = require(`../error/validation-error`);
 const validate = require(`./validate`);
 
@@ -137,8 +137,7 @@ const ERROR_HANDLER = (err, req, res, _next) => {
 
 const INVALID_METHODS = (req, res, next) => {
   if (!VALID_METHODS.includes(req.method)) {
-    res.status(501);
-    throw new InvalidMethodError(`${req.method}`);
+    throw new NotFoundMethodError(`${req.method}`);
   } else {
     next();
   }
