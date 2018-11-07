@@ -5,12 +5,13 @@ const logger = require(`../logger`);
 
 // eslint-disable-next-line new-cap
 const postsRouter = express.Router();
-const IllegalArgumentError = require(`../error/illegal-argument-error`);
-const NotFoundError = require(`../error/not-found-error`);
 const multer = require(`multer`);
 const MongoError = require(`mongodb`).MongoError;
 const {Duplex} = require(`stream`);
 
+const IllegalArgumentError = require(`../error/illegal-argument-error`);
+const NotFoundError = require(`../error/not-found-error`);
+const NotFoundMethodError = require(`../error/not-found-method-error.js`);
 const ValidationError = require(`../error/validation-error`);
 const validate = require(`./validate`);
 
@@ -19,6 +20,7 @@ const jsonParser = express.json();
 
 const SKIP_DEFAULT = 0;
 const LIMIT_DEFAULT = 50;
+const VALID_METHODS = [`GET`, `POST`];
 
 const asyncMiddleware = (fn) => (req, res, next) => fn(req, res, next).catch(next);
 
@@ -133,8 +135,18 @@ const ERROR_HANDLER = (err, req, res, _next) => {
   res.status(err.code || 500).send(err.message);
 };
 
+const INVALID_METHODS = (req, res, next) => {
+  if (!VALID_METHODS.includes(req.method)) {
+    throw new NotFoundMethodError(`${req.method}`);
+  } else {
+    next();
+  }
+};
+
+postsRouter.use(INVALID_METHODS);
 postsRouter.use(ERROR_HANDLER);
 postsRouter.use(NOT_FOUND_HANDLER);
+
 
 module.exports = (postsStore, imageStore) => {
   postsRouter.postsStore = postsStore;

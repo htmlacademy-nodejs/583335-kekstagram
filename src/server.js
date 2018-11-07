@@ -7,12 +7,11 @@ const imageStore = require(`./image/store`);
 const postRouter = require(`./posts/router.js`)(postsStore, imageStore);
 const logger = require(`./logger`);
 
-
 const app = express();
 
-const DEFAULT_PORT = 3000;
-
-const {SERVER_PORT = 3000, SERVER_HOST = `localhost`} = process.env;
+const {SERVER_PORT, SERVER_HOST} = process.env;
+const DEFAULT_PORT = SERVER_PORT;
+const MIM_NUMBER_PORT = 2000;
 
 const NOT_FOUND_HANDLER = (req, res) => {
   res.status(404).send(`Page was not found`);
@@ -46,7 +45,9 @@ module.exports = {
   name: `server`,
   description: `server`,
   execute(port = DEFAULT_PORT) {
-    runServer(port);
+    const portArgv = (process.argv[3] > MIM_NUMBER_PORT) ? process.argv[3] : port;
+
+    runServer(portArgv);
   },
   app: runServer,
 };

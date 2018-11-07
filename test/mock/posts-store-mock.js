@@ -2,7 +2,7 @@
 
 const Cursor = require(`./cursor-mock`);
 // const generateData = require(`../generator/createFileEntity`);
-const {generateEntity} = require(`../generator/generateEntity.js`);
+const {generateEntity} = require(`../../src/generator/generateEntity.js`);
 const {
   NUMBER_ENTITY_IN_STORE,
   POST_IN_STORE,
